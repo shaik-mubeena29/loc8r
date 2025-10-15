@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .row.banner
+    .col-12
+      h1= pageHeader.title
+      p.lead= pageHeader.strapline
+
+  .row
+    .col-12.col-md-8
+      if locations.length
+        each location in locations
+          .card.mb-3
+            .card-body
+              h4.card-title
+                a(href=`/location/${location.name.toLowerCase().replace(' ', '-')}`)= location.name
+                small.text-muted &nbsp; #{location.distance} away
+              p.card-text= location.address
+              p
+                | Rating: 
+                = location.rating
+              p
+                span Facilities:
+                each facility in location.facilities
+                  span.badge.bg-light.text-dark.mx-1= facility
+      else
+        p No locations found nearby.
+
+    .col-12.col-md-4
+      p= sidebar
